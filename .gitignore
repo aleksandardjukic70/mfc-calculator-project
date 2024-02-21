@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+/.vs/CalculatorProject/v17/ipch/a4d88d6fee41d857.ipch
+/.vs/CalculatorProject
