@@ -8,6 +8,7 @@
 #define IDD_CALCULATORPROJECT_DIALOG    102
 #define IDR_MAINFRAME                   128
 #define IDC_EDIT1                       1000
+#define IDC_EDIT_CONTROL                1000
 #define IDC_BUTTON_DECIMAL              1001
 #define IDC_BUTTON_ZERO                 1002
 #define IDC_BUTTON_EQUALS               1003
@@ -26,6 +27,7 @@
 #define IDC_BUTTON                      1016
 #define IDC_BUTTON_DIVISION             1016
 #define IDC_BUTTON_CLEAR                1017
+#define IDC_STATIC_0                    1018
 
 // Next default values for new objects
 // 
