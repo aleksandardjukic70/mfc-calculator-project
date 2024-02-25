@@ -1,0 +1,35 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+/.vs/CalculatorProject/v17/ipch/a4d88d6fee41d857.ipch
+/.vs/CalculatorProject
+/.vs/mfc-calculator-project-main/v17/ipch/AutoPCH/1de66a4856245dda/CALCULATORPROJECTDLG.ipch
