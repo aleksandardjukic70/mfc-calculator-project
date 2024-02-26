@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Aleksandar\source\repos\CalculatorProject\x64\Debug\CMathOperations.dll</FullPath>
+      <FullPath>C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CMathOperations.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

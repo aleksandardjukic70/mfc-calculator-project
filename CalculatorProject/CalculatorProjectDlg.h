@@ -4,6 +4,7 @@
 
 #pragma once
 #include <afxwin.h>
+#include <afxbutton.h>
 #include "../CMathOperations/CMathOperationsFunctions.h"
 
 
@@ -42,6 +43,7 @@ public:
 	CString m_resultStringValue;
 	CString m_result;
 	CMathOperationsFunctions m_operation;
+	//CButtonStyle m_style;
 	int m_calculationValue;
 	//CEdit m_groupBoxStringValue;
 
@@ -49,23 +51,23 @@ public:
 	CString m_keyPath = L"SOFTWARE\\CalculatorApplication";
 	LONG result{};
 
-	CButton m_button0;
-	CButton m_button1;
-	CButton m_button2;
-	CButton m_button3;
-	CButton m_button4;
-	CButton m_button5;
-	CButton m_button6;
-	CButton m_button7;
-	CButton m_button8;
-	CButton m_button9;
-	CButton m_buttonDecimal;
-	CButton m_buttonClear;
-	CButton m_buttonAddition;
-	CButton m_buttonSubtraction;
-	CButton m_buttonMultiplication;
-	CButton m_buttonDivision;
-	CButton m_buttonEquals;
+	CMFCButton m_button0;
+	CMFCButton m_button1;
+	CMFCButton m_button2;
+	CMFCButton m_button3;
+	CMFCButton m_button4;
+	CMFCButton m_button5;
+	CMFCButton m_button6;
+	CMFCButton m_button7;
+	CMFCButton m_button8;
+	CMFCButton m_button9;
+	CMFCButton m_buttonDecimal;
+	CMFCButton m_buttonClear;
+	CMFCButton m_buttonAddition;
+	CMFCButton m_buttonSubtraction;
+	CMFCButton m_buttonMultiplication;
+	CMFCButton m_buttonDivision;
+	CMFCButton m_buttonEquals;
 
 	afx_msg void OnBnClickedButtonZero();
 	afx_msg void OnBnClickedButtonOne();
@@ -84,6 +86,9 @@ public:
 	afx_msg void OnBnClickedButtonMultiplication();
 	afx_msg void OnBnClickedButtonDivision();
 	afx_msg void OnBnClickedButtonEquals();
-	afx_msg void CreateRegistryKey();
-	//afx_msg void ChangeGroupBoxName();
+	afx_msg void CreateRegistryKeyZero();
+	afx_msg void CreateRegistryKeyOne();
+	afx_msg void ApplyButtonStylesZero(CButton& button);
+	afx_msg void ApplyButtonStylesOne(CMFCButton& button);
+
 };

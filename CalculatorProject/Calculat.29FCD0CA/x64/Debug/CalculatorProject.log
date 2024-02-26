@@ -1,6 +1,4 @@
-﻿  pch.cpp
-  CalculatorProject.cpp
+﻿  CalculatorProject.cpp
   CalculatorProjectDlg.cpp
   Generating Code...
-     Creating library C:\Users\Aleksandar\source\repos\CalculatorProject\x64\Debug\CalculatorProject.lib and object C:\Users\Aleksandar\source\repos\CalculatorProject\x64\Debug\CalculatorProject.exp
-  CalculatorProject.vcxproj -> C:\Users\Aleksandar\source\repos\CalculatorProject\x64\Debug\CalculatorProject.exe
+  CalculatorProject.vcxproj -> C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CalculatorProject.exe

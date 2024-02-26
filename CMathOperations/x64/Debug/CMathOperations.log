@@ -1,2 +1,6 @@
-﻿  CMathOperationsFunctions.cpp
-  CMathOperations.vcxproj -> C:\Users\Aleksandar\source\repos\CalculatorProject\x64\Debug\CMathOperations.dll
+﻿  pch.cpp
+  CMathOperations.cpp
+  CMathOperationsFunctions.cpp
+  Generating Code...
+     Creating library C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CMathOperations.lib and object C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CMathOperations.exp
+  CMathOperations.vcxproj -> C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CMathOperations.dll
