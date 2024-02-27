@@ -7,12 +7,9 @@ class exportClass CMathOperationsFunctions
 {
 
 public:
-	int separator;
-	CString leftString;
-	CString rightString;
-	int leftOperand;
-	int rightOperand;
-	int result;
+	int leftNumber;
+	int rightNumber;
+	int operation;
 
 	int Addition(CString currentStringValue);
 	int Subtraction(CString currentStringValue);

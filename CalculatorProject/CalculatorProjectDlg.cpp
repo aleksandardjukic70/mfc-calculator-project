@@ -36,8 +36,7 @@ public:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButtonRegKeyZero();
-	afx_msg void OnBnClickedButtonRegKeyOne();
+	
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -50,8 +49,6 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_REG_KEY_ZERO, &CAboutDlg::OnBnClickedButtonRegKeyZero)
-	ON_BN_CLICKED(IDC_BUTTON_REG_KEY_ONE, &CAboutDlg::OnBnClickedButtonRegKeyOne)
 END_MESSAGE_MAP()
 
 
@@ -125,6 +122,10 @@ BOOL CCalculatorProjectDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
+	SwitchStyles();
+
+	//CreateRegistryKeyZero();
+	//CreateRegistryKeyOne();
 	// Set colors
 	/*CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
 			&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
@@ -217,7 +218,7 @@ HCURSOR CCalculatorProjectDlg::OnQueryDragIcon()
 
 void CCalculatorProjectDlg::OnBnClickedButtonZero()
 {	
-	CreateRegistryKeyZero();
+	//CreateRegistryKeyZero();
 	m_button0.GetWindowText(m_buttonValue);
 	m_currentStringValue += m_buttonValue;
 	m_editStringControl.SetWindowText(m_currentStringValue);
@@ -226,7 +227,7 @@ void CCalculatorProjectDlg::OnBnClickedButtonZero()
 
 void CCalculatorProjectDlg::OnBnClickedButtonOne()
 {
-	CreateRegistryKeyOne();
+	//CreateRegistryKeyOne();
 	m_button1.GetWindowText(m_buttonValue);
 	m_currentStringValue += m_buttonValue;
 	m_editStringControl.SetWindowText(m_currentStringValue);
@@ -429,17 +430,6 @@ void CCalculatorProjectDlg::CreateRegistryKeyZero()
 	{
 		DWORD useCButton = 0;
 		result = m_regKey.SetDWORDValue(_T("UseCButton"), useCButton);
-		
-		if (useCButton == 0)
-		{
-			CButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9, 
-			&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
-
-			for (CButton* button : buttons)
-			{
-				ApplyButtonStylesZero(*button);
-			}
-		}
 	}
 
 }
@@ -447,27 +437,17 @@ void CCalculatorProjectDlg::CreateRegistryKeyZero()
 void CCalculatorProjectDlg::CreateRegistryKeyOne()
 {
 	result = m_regKey.Create(HKEY_CURRENT_USER, m_keyPath);
+	if (result == ERROR_SUCCESS)
 	{
 		DWORD useCButton = 1;
 		result = m_regKey.SetDWORDValue(_T("UseCButton"), useCButton);
-
-		if (useCButton == 1)
-		{
-			CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
-			&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
-
-			for (CMFCButton* button : buttons)
-			{
-				ApplyButtonStylesOne(*button);
-			}
-		}
 	}
 
 }
 
-void CCalculatorProjectDlg::ApplyButtonStylesZero(CButton& button)
+void CCalculatorProjectDlg::ApplyButtonStylesZero(CMFCButton& button)
 {
-	//button.EnableWindowsTheming(FALSE);
+	button.EnableWindowsTheming(TRUE);
 	//button.m_nFlatStyle = CMFCButton::BUTTONSTYLE_NOBORDERS;
 	//button.m_bTransparent = FALSE;
 	//button.SetFaceColor(RGB(255, 255, 255), TRUE);
@@ -486,18 +466,42 @@ void CCalculatorProjectDlg::ApplyButtonStylesOne(CMFCButton& button)
 	//button.SetFaceColor(RGB(9, 2, 1), TRUE);
 	button.SetTextColor(RGB(255, 0, 255));
 	button.RedrawWindow();
-	//button.Invalidate();
-	//button.UpdateWindow();
+	button.Invalidate();
+	button.UpdateWindow();
 
 }
 
-void CAboutDlg::OnBnClickedButtonRegKeyZero()
-{
-	//CreateRegistryKeyZero();
-}
+void CCalculatorProjectDlg::SwitchStyles()
+{	
+	result = m_regKey.Open(HKEY_CURRENT_USER, m_keyPath);
+	if (ERROR_SUCCESS == result)
+	{
+		result = m_regKey.QueryDWORDValue(_T("UseCButton"), value);
 
+			if (value == 0)
+			{
+				CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
+					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
 
-void CAboutDlg::OnBnClickedButtonRegKeyOne()
-{
-	//CreateRegistryKeyOne();
+				for (CMFCButton* button : buttons)
+				{
+					ApplyButtonStylesZero(*button);
+				}
+			}
+			
+			else if (value == 1)
+			{
+				CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
+					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
+
+				for (CMFCButton* button : buttons)
+				{
+					ApplyButtonStylesOne(*button);
+				}
+			}
+		
+
+		
+	}
+
 }

@@ -48,8 +48,10 @@ public:
 	//CEdit m_groupBoxStringValue;
 
 	CRegKey m_regKey;
+	DWORD useCButton;
 	CString m_keyPath = L"SOFTWARE\\CalculatorApplication";
 	LONG result{};
+	DWORD value;
 
 	CMFCButton m_button0;
 	CMFCButton m_button1;
@@ -68,6 +70,9 @@ public:
 	CMFCButton m_buttonMultiplication;
 	CMFCButton m_buttonDivision;
 	CMFCButton m_buttonEquals;
+
+	CButton* m_standardButtons[1];
+	CMFCButton* m_mfcButtons[1];
 
 	afx_msg void OnBnClickedButtonZero();
 	afx_msg void OnBnClickedButtonOne();
@@ -88,7 +93,10 @@ public:
 	afx_msg void OnBnClickedButtonEquals();
 	afx_msg void CreateRegistryKeyZero();
 	afx_msg void CreateRegistryKeyOne();
-	afx_msg void ApplyButtonStylesZero(CButton& button);
+	afx_msg void ApplyButtonStylesZero(CMFCButton& button);
 	afx_msg void ApplyButtonStylesOne(CMFCButton& button);
-
+	afx_msg void SwitchStyles();
 };
+
+
+

@@ -2,72 +2,141 @@
 #include <afxwin.h> 
 #include "CMathOperationsFunctions.h"
 
-
 int CMathOperationsFunctions::Addition(CString currentStringValue)
 {
-    // finding position of '+' in currentStringValue
-    separator = currentStringValue.Find(_T('+'));
+    CString number1;
+    CString number2;
+    bool operatorFound = false;
 
-    // spliting currentStringValue to left and right strings
-    leftString = currentStringValue.Left(separator);
-    rightString = currentStringValue.Mid(separator + 1);
+    // Iterate through each character in the CString
+    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
+    {
+        TCHAR c = currentStringValue.GetAt(i); // Get character at position i
 
-    leftOperand = _ttoi(leftString);
-    rightOperand = _ttoi(rightString);
+        if (c == '+') 
+        {
+            operatorFound = true; // Mark that '+' has been found
+            continue; // Skip adding '+' to any number
+        }
 
-    result = leftOperand + rightOperand;
+        else if (!operatorFound) 
+        {
+            // Append character to number1 if '+' not yet found
+            number1 += c;
+        }
+        else 
+        {
+            // Append character to number2 if '+' has been found
+            number2 += c;
+        }
+    }
 
-    return result;
+    leftNumber = _ttoi(number1);
+    rightNumber = _ttoi(number2);
 
+    operation = leftNumber + rightNumber;
+    return operation;
 }
 
 int CMathOperationsFunctions::Subtraction(CString currentStringValue)
 {
-    separator = currentStringValue.Find(_T('-'));
+    CString number1;
+    CString number2;
+    bool operatorFound = false;
 
-    leftString = currentStringValue.Left(separator);
-    rightString = currentStringValue.Mid(separator + 1);
+    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
+    {
+        TCHAR c = currentStringValue.GetAt(i);
 
-    leftOperand = _ttoi(leftString);
-    rightOperand = _ttoi(rightString);
+        if (c == '-') 
+        {
+            operatorFound = true; 
+            continue; 
+        }
 
-    result = leftOperand - rightOperand;
+        else if (!operatorFound) 
+        {
+            number1 += c;
+        }
+        else 
+        {
+            number2 += c;
+        }
+    }
 
-    return result;
+    leftNumber = _ttoi(number1);
+    rightNumber = _ttoi(number2);
 
+    operation = leftNumber - rightNumber;
+    return operation;
 }
 
 int CMathOperationsFunctions::Multiplication(CString currentStringValue)
 {
-    separator = currentStringValue.Find(_T('*'));
+    CString number1;
+    CString number2;
+    bool operatorFound = false;
 
-    leftString = currentStringValue.Left(separator);
-    rightString = currentStringValue.Mid(separator + 1);
+    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
+    {
+        TCHAR c = currentStringValue.GetAt(i);
 
-    leftOperand = _ttoi(leftString);
-    rightOperand = _ttoi(rightString);
+        if (c == '*') 
+        {
+            operatorFound = true;
+            continue;
+        }
 
-    result = leftOperand * rightOperand;
+        else if (!operatorFound)
+        {
+            number1 += c;
+        }
+        else 
+        {
+            number2 += c;
+        }
+    }
 
-    return result;
+    leftNumber = _ttoi(number1);
+    rightNumber = _ttoi(number2);
 
+    operation = leftNumber * rightNumber;
+    return operation;
 }
 
 int CMathOperationsFunctions::Division(CString currentStringValue)
 {
+    CString number1;
+    CString number2;
+    bool operatorFound = false;
 
-    separator = currentStringValue.Find(_T('/'));
-
-    leftString = currentStringValue.Left(separator);
-    rightString = currentStringValue.Mid(separator + 1);
-
-    leftOperand = _ttoi(leftString);
-    rightOperand = _ttoi(rightString);
-
-    if (rightOperand != 0)
+    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
     {
-        result = leftOperand / rightOperand;
-        return result;
+        TCHAR c = currentStringValue.GetAt(i);
+
+        if (c == '/')
+        {
+            operatorFound = true;
+            continue;
+        }
+
+        else if (!operatorFound) 
+        {
+            number1 += c;
+        }
+        else 
+        {
+            number2 += c;
+        }
+    }
+
+    leftNumber = _ttoi(number1);
+    rightNumber = _ttoi(number2);
+
+    if (rightNumber != 0)
+    {
+        operation = leftNumber / rightNumber;
+        return operation;
     } 
 
     else 
