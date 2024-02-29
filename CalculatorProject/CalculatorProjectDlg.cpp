@@ -266,10 +266,25 @@ void CCalculatorProjectDlg::OnBnClickedButtonNine()
 
 void CCalculatorProjectDlg::OnBnClickedButtonDecimal()
 {
-	m_operator = _T('.');
-	ButtonFunction(m_operator);
-	/*m_currentStringValue += m_operator;
-	m_editStringControl.SetWindowText(m_currentStringValue);*/
+	//m_operator = _T('.');
+	
+		if (m_currentStringValue.IsEmpty())
+		{
+			OnBnClickedButtonZero();
+			m_currentStringValue += _T('.');
+		}
+		// If there is '.' on index 1 but its not somewhere in the string add '.' but dont add two in a row
+		else if (m_currentStringValue.GetAt(1) == _T('.') && m_currentStringValue.Find(_T('.'), 2) == -1 && m_currentStringValue[m_currentStringValue.GetLength() - 1] != _T('.'))
+		{
+			m_currentStringValue += _T('.');
+		}
+
+		// If the '.' is not on index 1, add one '.'
+		else if (m_currentStringValue.GetAt(1) != _T('.') && m_currentStringValue.Find(_T('.')) == -1) {
+			m_currentStringValue += _T('.');
+		}
+
+		m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
@@ -405,23 +420,9 @@ void CCalculatorProjectDlg::StringSeparator(CString m_currentStringValue, TCHAR 
 			else
 			{
 				leftNumberString += currentCharacter;
-				AfxMessageBox(_T("leftN" + leftNumberString));
+				AfxMessageBox(_T("leftN" + leftNumberString));   // -0.5 - 0.5
 			}
 		}
-
-		/*else if (currentCharacter == _T('.'))
-		{
-			if (!operatorFound)
-			{
-				leftNumberString += currentCharacter;
-				AfxMessageBox(_T("leftN" + leftNumberString));
-			}
-			else
-			{
-				rightNumberString += currentCharacter;
-				AfxMessageBox(_T("rightN" + rightNumberString));
-			}
-		}*/
 
 		else if (!operatorFound)
 		{
