@@ -1,4 +1,4 @@
-
+﻿
 // CalculatorProjectDlg.h : header file
 //
 
@@ -37,11 +37,13 @@ protected:
 public:
 
 	CString m_currentStringValue;
-	CString m_operator;
+	TCHAR m_operator;
 	CString m_resultStringValue;
 	CString m_result;
 	CMathOperationsFunctions m_operation;
-	int m_calculationValue;
+	double m_calculationValue;
+	double leftNumber;
+	double rightNumber;
 
 	CRegKey m_regKey;
 	CString m_keyPath = L"SOFTWARE\\CalculatorApplication";
@@ -85,9 +87,10 @@ public:
 	afx_msg void OnBnClickedButtonMultiplication();
 	afx_msg void OnBnClickedButtonDivision();
 	afx_msg void OnBnClickedButtonEquals();
-	afx_msg void ButtonFunction(CString m_operator);
-	afx_msg void ArithmeticOperationPasser(CString m_currentStringValue, CString m_operator);
+	afx_msg void ButtonFunction(TCHAR m_operator);
+	afx_msg void ArithmeticOperationPasser(double leftNumber, double rightNumber, TCHAR m_operator); //Ovde će se prosleđivati num1 i num2
 	afx_msg void ResultFunction();
+	afx_msg void StringSeparator(CString m_currentStringValue, TCHAR m_operator);
 
 	afx_msg void RegKeyBtnStyleSwitch(DWORD useCButton);
 	afx_msg void ApplyButtonStyleZero(CButton& button);

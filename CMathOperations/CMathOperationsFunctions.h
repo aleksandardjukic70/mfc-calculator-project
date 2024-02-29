@@ -8,11 +8,11 @@ class exportClass CMathOperationsFunctions
 
 public:
 
-	int leftNumber;
-	int rightNumber;
-	int operation;
+	double leftNumber;
+	double rightNumber;
+	double operation;
 
 	// member function
-	int MathOperation(CString currentStringValue, CString m_operator);
+	double MathOperation(double leftNumber, double rightNumber, TCHAR m_operator);
 
 };

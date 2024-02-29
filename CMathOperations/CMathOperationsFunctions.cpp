@@ -1,15 +1,15 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <afxwin.h> 
 #include "CMathOperationsFunctions.h"
 
 
-int CMathOperationsFunctions::MathOperation(CString currentStringValue, CString m_operator)
+double CMathOperationsFunctions::MathOperation(double leftNumber, double rightNumber, TCHAR m_operator) // Ovde će se prosleđivati num1 i num2
 {
-    CString leftNumberString;
+    /*CString leftNumberString;
     CString rightNumberString;
-    bool operatorFound = false;
+    bool operatorFound = false;*/
 
-    for (int i = 0; i < currentStringValue.GetLength(); i++)  // a+b  
+   /* for (int i = 0; i < currentStringValue.GetLength(); i++)  // a+b  
     {
         TCHAR currentCharacter = currentStringValue.GetAt(i);
 
@@ -31,7 +31,7 @@ int CMathOperationsFunctions::MathOperation(CString currentStringValue, CString 
 
     leftNumber = _ttoi(leftNumberString);
     rightNumber = _ttoi(rightNumberString);
-
+    */
     if (m_operator == _T('+'))
     {
         operation = leftNumber + rightNumber;

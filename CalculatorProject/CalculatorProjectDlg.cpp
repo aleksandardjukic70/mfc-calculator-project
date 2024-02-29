@@ -144,7 +144,7 @@ BOOL CCalculatorProjectDlg::OnInitDialog()
 	}
 
 	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
+	//  when the application"s main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	//m_button4.OnFillBackground()
@@ -206,61 +206,61 @@ HCURSOR CCalculatorProjectDlg::OnQueryDragIcon()
 
 void CCalculatorProjectDlg::OnBnClickedButtonZero()
 {	
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('0'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("0"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonOne()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('1'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("1"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonTwo()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('2'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("2"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonThree()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('3'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("3"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFour()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('4'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("4"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFive()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('5'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("5"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSix()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('6'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("6"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSeven()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('7'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("7"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonEight()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('8'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("8"));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonNine()
 {
-	m_editStringControl.SetWindowText(m_currentStringValue += _T('9'));
+	m_editStringControl.SetWindowText(m_currentStringValue += _T("9"));
 }
 
 
@@ -268,6 +268,8 @@ void CCalculatorProjectDlg::OnBnClickedButtonDecimal()
 {
 	m_operator = _T('.');
 	ButtonFunction(m_operator);
+	/*m_currentStringValue += m_operator;
+	m_editStringControl.SetWindowText(m_currentStringValue);*/
 }
 
 
@@ -287,11 +289,51 @@ void CCalculatorProjectDlg::OnBnClickedButtonAddition()
 
 void CCalculatorProjectDlg::OnBnClickedButtonSubtraction()
 {
-	// napraviti logiku za operator '-' (for loop?)
-	// Ako je prvi char minus a sledeći nakon njega broj-> dodeli tu vrednost u posebnu cstring varijablu ->
-	// -> konvertuj je u int
 	m_operator = _T('-');
-	m_currentStringValue += _T('-');
+
+	// If there is '*' or '/' char, override operator and add '-'
+	// This resolves programs confusion for which operator to use
+	// when they are one by another
+	if (m_currentStringValue.Find(_T('*')) != -1)
+	{
+		m_operator = _T('*');
+		m_currentStringValue += _T('-');
+	}
+
+	else if (m_currentStringValue.Find(_T('/')) != -1)
+	{
+		m_operator = _T('/');
+		m_currentStringValue += _T('-');
+	}
+
+	// If there is '-' on index 0 but its not somewhere in the string add '-' but dont add two in a row
+	else if (m_currentStringValue.GetAt(0) == _T('-') && m_currentStringValue.Find(_T('-'), 1) == -1 && m_currentStringValue[m_currentStringValue.GetLength() - 1] != _T('-'))
+	{
+		
+		if (m_operator == _T('*'))
+		{
+			m_currentStringValue += _T('-');
+		}
+
+		else if (m_operator == _T('/'))
+		{
+			m_currentStringValue += _T('-');
+		}
+
+		else
+		{
+			m_currentStringValue += _T('-');
+		}
+	}
+
+	// If the '-' is not on index 0, add one '-' but dont set the operator
+	else if (m_currentStringValue.GetAt(0) != _T('-') && m_currentStringValue.Find(_T('-')) == -1)
+	{
+
+		m_currentStringValue += _T('-');
+
+	}
+	
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
@@ -309,8 +351,13 @@ void CCalculatorProjectDlg::OnBnClickedButtonDivision()
 	ButtonFunction(m_operator);
 }
 
+void CCalculatorProjectDlg::OnBnClickedButtonEquals()
+{
+	ResultFunction();
+}
 
-void CCalculatorProjectDlg::ButtonFunction(CString m_operator)
+
+void CCalculatorProjectDlg::ButtonFunction(TCHAR m_operator)
 {
 	if (m_currentStringValue.IsEmpty())
 	{
@@ -327,45 +374,116 @@ void CCalculatorProjectDlg::ButtonFunction(CString m_operator)
 	}
 }
 
-void CCalculatorProjectDlg::ArithmeticOperationPasser(CString m_currentStringValue, CString m_operator)
+void CCalculatorProjectDlg::ArithmeticOperationPasser(double leftNumeber, double rightNumber, TCHAR m_operator)
 {
-	m_calculationValue = m_operation.MathOperation(m_currentStringValue, m_operator);
+	m_calculationValue = m_operation.MathOperation(leftNumber, rightNumber, m_operator);
+}
+
+void CCalculatorProjectDlg::StringSeparator(CString m_currentStringValue, TCHAR m_operator)
+{
+	CString leftNumberString;
+	CString rightNumberString;
+	bool operatorFound = false;
+
+	for (int i = 0; i < m_currentStringValue.GetLength(); i++) // -5-5
+	{
+		TCHAR currentCharacter = m_currentStringValue.GetAt(i);
+
+		if (currentCharacter == _T('-'))
+		{
+			if (operatorFound)
+			{
+				rightNumberString += currentCharacter;
+				AfxMessageBox(_T("rightN" + rightNumberString));
+			}
+
+			else if (leftNumberString.GetLength() != 0)
+			{
+				operatorFound = true;
+			} 
+
+			else
+			{
+				leftNumberString += currentCharacter;
+				AfxMessageBox(_T("leftN" + leftNumberString));
+			}
+		}
+
+		/*else if (currentCharacter == _T('.'))
+		{
+			if (!operatorFound)
+			{
+				leftNumberString += currentCharacter;
+				AfxMessageBox(_T("leftN" + leftNumberString));
+			}
+			else
+			{
+				rightNumberString += currentCharacter;
+				AfxMessageBox(_T("rightN" + rightNumberString));
+			}
+		}*/
+
+		else if (!operatorFound)
+		{
+			if (currentCharacter == m_operator)
+			{
+				operatorFound = true;
+			}
+
+			else
+			{
+				leftNumberString += currentCharacter;
+				AfxMessageBox(_T("leftN" + leftNumberString));
+			}
+		}
+
+		else
+		{
+			rightNumberString += currentCharacter;
+			AfxMessageBox(_T("rightN" + rightNumberString));
+		}
+	}
+
+
+
+	leftNumber = _tstof(leftNumberString);
+	rightNumber = _tstof(rightNumberString);
 }
 
 void CCalculatorProjectDlg::ResultFunction()
 {
 	m_resultStringValue.Empty();
+	
 
 	if (m_operator == _T('+'))
 	{
-		ArithmeticOperationPasser(m_currentStringValue, m_operator);
+		StringSeparator(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(leftNumber, rightNumber, m_operator);
 	}
 
 	else if (m_operator == _T('-'))
 	{
-		ArithmeticOperationPasser(m_currentStringValue, m_operator);
+		StringSeparator(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(leftNumber, rightNumber, m_operator);
 	}
 
 	else if (m_operator == _T('*'))
 	{
-		ArithmeticOperationPasser(m_currentStringValue, m_operator);
+		StringSeparator(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(leftNumber, rightNumber, m_operator);
 	}
 
 	else if (m_operator == _T('/'))
 	{
-		ArithmeticOperationPasser(m_currentStringValue, m_operator);
+		StringSeparator(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(leftNumber, rightNumber, m_operator);
 	}
 
-	m_result.Format(_T("%d"), m_calculationValue);
-	m_resultStringValue += _T(" = ") + m_result;
-	m_editStringControl.SetWindowText(m_resultStringValue);
+	m_result.Format(_T("%.5f"), m_calculationValue);
+	m_editStringControl.SetWindowText(m_resultStringValue += _T(" = ") + m_result);
 	m_currentStringValue.Empty();
 }
 
-void CCalculatorProjectDlg::OnBnClickedButtonEquals()
-{
-	ResultFunction();
-}
 
 
 // Registry Functions
