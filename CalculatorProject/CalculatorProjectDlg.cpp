@@ -206,71 +206,61 @@ HCURSOR CCalculatorProjectDlg::OnQueryDragIcon()
 
 void CCalculatorProjectDlg::OnBnClickedButtonZero()
 {	
-	m_currentStringValue += _T('0');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('0'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonOne()
 {
-	m_currentStringValue += _T('1');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('1'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonTwo()
 {
-	m_currentStringValue += _T('2');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('2'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonThree()
 {
-	m_currentStringValue += _T('3');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('3'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFour()
 {
-	m_currentStringValue += _T('4');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('4'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFive()
 {
-	m_currentStringValue += _T('5');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('5'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSix()
 {
-	m_currentStringValue += _T('6');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('6'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSeven()
 {
-	m_currentStringValue += _T('7');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('7'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonEight()
 {
-	m_currentStringValue += _T('8');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('8'));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonNine()
 {
-	m_currentStringValue += _T('9');
-	m_editStringControl.SetWindowText(m_currentStringValue);
+	m_editStringControl.SetWindowText(m_currentStringValue += _T('9'));
 }
 
 
@@ -378,6 +368,8 @@ void CCalculatorProjectDlg::OnBnClickedButtonEquals()
 }
 
 
+// Registry Functions
+
 void CCalculatorProjectDlg::RegKeyBtnStyleSwitch(DWORD useCButton)
 {
 	result = m_regKey.Create(HKEY_CURRENT_USER, m_keyPath);
@@ -416,12 +408,10 @@ void CCalculatorProjectDlg::RegKeyBtnStyleSwitch(DWORD useCButton)
 
 }
 
-
 void CCalculatorProjectDlg::ApplyButtonStyleZero(CButton& button)
 {
 	button.RedrawWindow();
 }
-
 
 void CCalculatorProjectDlg::ApplyButtonStyleOne(CMFCButton& button)
 {
