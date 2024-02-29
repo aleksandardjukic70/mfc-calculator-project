@@ -36,22 +36,19 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 
-	CEdit m_editStringControl;
 	CString m_currentStringValue;
-	CString m_buttonValue;
 	CString m_operator;
 	CString m_resultStringValue;
 	CString m_result;
 	CMathOperationsFunctions m_operation;
-	//CButtonStyle m_style;
 	int m_calculationValue;
-	//CEdit m_groupBoxStringValue;
 
 	CRegKey m_regKey;
-	DWORD useCButton;
 	CString m_keyPath = L"SOFTWARE\\CalculatorApplication";
 	LONG result{};
-	DWORD value;
+	DWORD m_value;
+
+	CEdit m_editStringControl;
 
 	CMFCButton m_button0;
 	CMFCButton m_button1;
@@ -71,9 +68,6 @@ public:
 	CMFCButton m_buttonDivision;
 	CMFCButton m_buttonEquals;
 
-	CButton* m_standardButtons[1];
-	CMFCButton* m_mfcButtons[1];
-
 	afx_msg void OnBnClickedButtonZero();
 	afx_msg void OnBnClickedButtonOne();
 	afx_msg void OnBnClickedButtonTwo();
@@ -91,11 +85,12 @@ public:
 	afx_msg void OnBnClickedButtonMultiplication();
 	afx_msg void OnBnClickedButtonDivision();
 	afx_msg void OnBnClickedButtonEquals();
-	afx_msg void CreateRegistryKeyZero();
-	afx_msg void CreateRegistryKeyOne();
-	afx_msg void ApplyButtonStylesZero(CMFCButton& button);
-	afx_msg void ApplyButtonStylesOne(CMFCButton& button);
-	afx_msg void SwitchStyles();
+	afx_msg void ButtonFunction(CString m_operator);
+	afx_msg void ResultFunction(CString m_currentStringValue, CString m_operator);
+
+	afx_msg void RegKeyBtnStyleSwitch(DWORD useCButton);
+	afx_msg void ApplyButtonStyleZero(CButton& button);
+	afx_msg void ApplyButtonStyleOne(CMFCButton& button);
 };
 
 

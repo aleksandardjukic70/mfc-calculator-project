@@ -67,6 +67,7 @@ void CCalculatorProjectDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 
 	//	This is the way
+	//  ID sa varijablom
 	DDX_Control(pDX, IDC_BUTTON_ZERO, m_button0);
 	DDX_Control(pDX, IDC_BUTTON_ONE, m_button1);
 	DDX_Control(pDX, IDC_BUTTON_TWO, m_button2);
@@ -85,14 +86,14 @@ void CCalculatorProjectDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_DIVISION, m_buttonDivision);
 	DDX_Control(pDX, IDC_BUTTON_EQUALS, m_buttonEquals);
 	DDX_Control(pDX, IDC_EDIT_CONTROL, m_editStringControl);
-	//DDX_Control(pDX, IDC_STATIC, m_groupBoxStringValue);
-
 }
 
 BEGIN_MESSAGE_MAP(CCalculatorProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+
+	// ID sa onclickfunc
 	ON_BN_CLICKED(IDC_BUTTON_ZERO, &CCalculatorProjectDlg::OnBnClickedButtonZero)
 	ON_BN_CLICKED(IDC_BUTTON_ONE, &CCalculatorProjectDlg::OnBnClickedButtonOne)
 	ON_BN_CLICKED(IDC_BUTTON_TWO, &CCalculatorProjectDlg::OnBnClickedButtonTwo)
@@ -111,8 +112,6 @@ BEGIN_MESSAGE_MAP(CCalculatorProjectDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_DIVISION, &CCalculatorProjectDlg::OnBnClickedButtonDivision)
 	ON_BN_CLICKED(IDC_BUTTON_EQUALS, &CCalculatorProjectDlg::OnBnClickedButtonEquals)
 
-
-	
 END_MESSAGE_MAP()
 
 
@@ -122,18 +121,7 @@ BOOL CCalculatorProjectDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	SwitchStyles();
-
-	//CreateRegistryKeyZero();
-	//CreateRegistryKeyOne();
-	// Set colors
-	/*CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
-			&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
-	for (CMFCButton* button : buttons)
-	{
-		ApplyButtonStylesZero(*button);
-	}*/
-
+	RegKeyBtnStyleSwitch(0);
 
 	// Add "About..." menu item to system menu.
 
@@ -214,294 +202,227 @@ HCURSOR CCalculatorProjectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-// This is where magic starts
+// This is where the magic starts
 
 void CCalculatorProjectDlg::OnBnClickedButtonZero()
 {	
-	//CreateRegistryKeyZero();
-	m_button0.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('0');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonOne()
 {
-	//CreateRegistryKeyOne();
-	m_button1.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('1');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonTwo()
 {
-	m_button2.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('2');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonThree()
 {
-	m_button3.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('3');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFour()
 {
-	m_button4.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('4');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonFive()
 {
-	m_button5.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('5');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSix()
 {
-	m_button6.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('6');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSeven()
 {
-	m_button7.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('7');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonEight()
 {
-	m_button8.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('8');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonNine()
 {
-	m_button9.GetWindowText(m_buttonValue);
-	m_currentStringValue += m_buttonValue;
+	m_currentStringValue += _T('9');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
+
 void CCalculatorProjectDlg::OnBnClickedButtonDecimal()
 {
-	if (m_currentStringValue.IsEmpty()) 
-	{
-		OnBnClickedButtonZero();
-		m_buttonDecimal.GetWindowText(m_buttonValue);
-		m_currentStringValue += m_buttonValue;
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
-
-	else if (m_currentStringValue.Find(_T('.')) == -1)
-	{
-		m_buttonDecimal.GetWindowText(m_buttonValue);
-		m_currentStringValue += m_buttonValue;
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
-
+	m_operator = _T('.');
+	ButtonFunction(m_operator);
 }
+
 
 void CCalculatorProjectDlg::OnBnClickedButtonClear()
 {
-	m_editStringControl.SetWindowText(_T(""));
 	m_currentStringValue.Empty();
+	m_editStringControl.SetWindowText(_T(""));
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonAddition()
 {
-	if (m_currentStringValue.IsEmpty())
-	{
-		OnBnClickedButtonZero();
-		m_currentStringValue += '+';
-		m_operator = '+';
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
-
-	else if (m_currentStringValue.Find(_T('+')) == -1)
-	{
-		m_currentStringValue += '+';
-		m_operator = '+';
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
+	m_operator = _T('+');
+	ButtonFunction(m_operator);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonSubtraction()
 {
-	// napraviti logiku za operator '-'
-	m_currentStringValue += '-';
-	m_operator = '-';
+	// napraviti logiku za operator '-' (for loop?)
+	m_operator = _T('-');
+	m_currentStringValue += _T('-');
 	m_editStringControl.SetWindowText(m_currentStringValue);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonMultiplication()
 {
-	if (m_currentStringValue.IsEmpty()) 
-	{
-		OnBnClickedButtonZero();
-		m_currentStringValue += '*';
-		m_operator = '*';
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
-
-	else if (m_currentStringValue.Find(_T('*')) == -1)
-	{
-		m_currentStringValue += '*';
-		m_operator = '*';
-		m_editStringControl.SetWindowText(m_currentStringValue);
-	}
-	
+	m_operator = _T('*');
+	ButtonFunction(m_operator);
 }
 
 
 void CCalculatorProjectDlg::OnBnClickedButtonDivision()
 {
+	m_operator = _T('/');
+	ButtonFunction(m_operator);
+}
+
+
+void CCalculatorProjectDlg::ButtonFunction(CString m_operator)
+{
 	if (m_currentStringValue.IsEmpty())
 	{
 		OnBnClickedButtonZero();
-		m_currentStringValue += '/';
-		m_operator = '/';
+
+		m_currentStringValue += m_operator;
 		m_editStringControl.SetWindowText(m_currentStringValue);
 	}
 
-	else if (m_currentStringValue.Find(_T('/')) == -1)
+	else if (m_currentStringValue.Find(m_operator) == -1)
 	{
-		m_currentStringValue += '/';
-		m_operator = '/';
+		m_currentStringValue += m_operator;
 		m_editStringControl.SetWindowText(m_currentStringValue);
 	}
-	
 }
 
+void CCalculatorProjectDlg::ResultFunction(CString m_currentStringValue, CString m_operator)
+{
+	m_calculationValue = m_operation.MathOperation(m_currentStringValue, m_operator);
+	m_result.Format(_T("%d"), m_calculationValue);
+}
 
 void CCalculatorProjectDlg::OnBnClickedButtonEquals()
 {
-	if (m_operator == '+')
-	{ 
-		m_calculationValue = m_operation.Addition(m_currentStringValue);
-		m_result.Format(_T("%d"), m_calculationValue);
-	}
+	m_resultStringValue.Empty();
 
-	else if (m_operator == '-')
+	if (m_operator == _T('+'))
 	{
-		m_calculationValue = m_operation.Subtraction(m_currentStringValue);
-		m_result.Format(_T("%d"), m_calculationValue);
+		ResultFunction(m_currentStringValue, m_operator);
 	}
 
-	else if (m_operator == '*')
+	else if (m_operator == _T('-'))
 	{
-		m_calculationValue = m_operation.Multiplication(m_currentStringValue);
-		m_result.Format(_T("%d"), m_calculationValue);
+		ResultFunction(m_currentStringValue, m_operator);
 	}
 
-	else if (m_operator == '/')
+	else if (m_operator == _T('*'))
 	{
-		m_calculationValue = m_operation.Division(m_currentStringValue);
-		m_result.Format(_T("%d"), m_calculationValue);
+		ResultFunction(m_currentStringValue, m_operator);
 	}
 
-	m_editStringControl.GetWindowText(m_resultStringValue);
-	m_resultStringValue += _T(" = ") + m_result + _T("\r\n");
+	else if (m_operator == _T('/'))
+	{
+		ResultFunction(m_currentStringValue, m_operator);
+	}
+
+	m_resultStringValue += _T(" = ") + m_result;
 	m_editStringControl.SetWindowText(m_resultStringValue);
+	m_currentStringValue.Empty();
 
 }
 
-void CCalculatorProjectDlg::CreateRegistryKeyZero()
+
+void CCalculatorProjectDlg::RegKeyBtnStyleSwitch(DWORD useCButton)
 {
 	result = m_regKey.Create(HKEY_CURRENT_USER, m_keyPath);
+
 	if (result == ERROR_SUCCESS) 
 	{
-		DWORD useCButton = 0;
 		result = m_regKey.SetDWORDValue(_T("UseCButton"), useCButton);
+
+		if (result == ERROR_SUCCESS)
+		{
+			result = m_regKey.QueryDWORDValue(_T("UseCButton"), m_value);
+
+			if (m_value == 0)
+			{
+				CButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
+					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
+
+				for (CButton* button : buttons)
+				{
+					ApplyButtonStyleZero(*button);
+				}
+			}
+
+			else if (m_value == 1)
+			{
+				CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
+					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
+
+				for (CMFCButton* button : buttons)
+				{
+					ApplyButtonStyleOne(*button);
+				}
+			}
+		}
 	}
 
 }
 
-void CCalculatorProjectDlg::CreateRegistryKeyOne()
-{
-	result = m_regKey.Create(HKEY_CURRENT_USER, m_keyPath);
-	if (result == ERROR_SUCCESS)
-	{
-		DWORD useCButton = 1;
-		result = m_regKey.SetDWORDValue(_T("UseCButton"), useCButton);
-	}
 
-}
-
-void CCalculatorProjectDlg::ApplyButtonStylesZero(CMFCButton& button)
+void CCalculatorProjectDlg::ApplyButtonStyleZero(CButton& button)
 {
-	button.EnableWindowsTheming(TRUE);
-	//button.m_nFlatStyle = CMFCButton::BUTTONSTYLE_NOBORDERS;
-	//button.m_bTransparent = FALSE;
-	//button.SetFaceColor(RGB(255, 255, 255), TRUE);
-	//button.SetTextColor(RGB(0, 0, 255));
 	button.RedrawWindow();
-	button.Invalidate();
-	button.UpdateWindow();
-
 }
 
-void CCalculatorProjectDlg::ApplyButtonStylesOne(CMFCButton& button)
+
+void CCalculatorProjectDlg::ApplyButtonStyleOne(CMFCButton& button)
 {
-	button.EnableWindowsTheming(FALSE);
-	button.m_nFlatStyle = CMFCButton::BUTTONSTYLE_NOBORDERS;
-	button.m_bTransparent = FALSE;
 	//button.SetFaceColor(RGB(9, 2, 1), TRUE);
 	button.SetTextColor(RGB(255, 0, 255));
+	button.m_nFlatStyle = CMFCButton::BUTTONSTYLE_NOBORDERS;
+	button.m_bTransparent = FALSE;
+	button.EnableWindowsTheming(FALSE);
 	button.RedrawWindow();
-	button.Invalidate();
-	button.UpdateWindow();
-
-}
-
-void CCalculatorProjectDlg::SwitchStyles()
-{	
-	result = m_regKey.Open(HKEY_CURRENT_USER, m_keyPath);
-	if (ERROR_SUCCESS == result)
-	{
-		result = m_regKey.QueryDWORDValue(_T("UseCButton"), value);
-
-			if (value == 0)
-			{
-				CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
-					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
-
-				for (CMFCButton* button : buttons)
-				{
-					ApplyButtonStylesZero(*button);
-				}
-			}
-			
-			else if (value == 1)
-			{
-				CMFCButton* buttons[17] = { &m_button0, &m_button1, &m_button2, &m_button3, &m_button4, &m_button5, &m_button6, &m_button7, &m_button8, &m_button9,
-					&m_buttonDecimal, &m_buttonClear, &m_buttonAddition, &m_buttonSubtraction, &m_buttonMultiplication, &m_buttonDivision , &m_buttonEquals };
-
-				for (CMFCButton* button : buttons)
-				{
-					ApplyButtonStylesOne(*button);
-				}
-			}
-		
-
-		
-	}
-
 }

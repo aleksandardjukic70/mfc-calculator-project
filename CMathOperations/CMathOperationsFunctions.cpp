@@ -2,148 +2,66 @@
 #include <afxwin.h> 
 #include "CMathOperationsFunctions.h"
 
-int CMathOperationsFunctions::Addition(CString currentStringValue)
+
+int CMathOperationsFunctions::MathOperation(CString currentStringValue, CString m_operator)
 {
-    CString number1;
-    CString number2;
+    CString leftNumberString;
+    CString rightNumberString;
     bool operatorFound = false;
 
-    // Iterate through each character in the CString
-    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
+    for (int i = 0; i < currentStringValue.GetLength(); i++)  // a+b  
     {
-        TCHAR c = currentStringValue.GetAt(i); // Get character at position i
+        TCHAR currentCharacter = currentStringValue.GetAt(i);
 
-        if (c == '+') 
-        {
-            operatorFound = true; // Mark that '+' has been found
-            continue; // Skip adding '+' to any number
-        }
-
-        else if (!operatorFound) 
-        {
-            // Append character to number1 if '+' not yet found
-            number1 += c;
-        }
-        else 
-        {
-            // Append character to number2 if '+' has been found
-            number2 += c;
-        }
-    }
-
-    leftNumber = _ttoi(number1);
-    rightNumber = _ttoi(number2);
-
-    operation = leftNumber + rightNumber;
-    return operation;
-}
-
-int CMathOperationsFunctions::Subtraction(CString currentStringValue)
-{
-    CString number1;
-    CString number2;
-    bool operatorFound = false;
-
-    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
-    {
-        TCHAR c = currentStringValue.GetAt(i);
-
-        if (c == '-') 
-        {
-            operatorFound = true; 
-            continue; 
-        }
-
-        else if (!operatorFound) 
-        {
-            number1 += c;
-        }
-        else 
-        {
-            number2 += c;
-        }
-    }
-
-    leftNumber = _ttoi(number1);
-    rightNumber = _ttoi(number2);
-
-    operation = leftNumber - rightNumber;
-    return operation;
-}
-
-int CMathOperationsFunctions::Multiplication(CString currentStringValue)
-{
-    CString number1;
-    CString number2;
-    bool operatorFound = false;
-
-    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
-    {
-        TCHAR c = currentStringValue.GetAt(i);
-
-        if (c == '*') 
+        if (currentCharacter == m_operator)
         {
             operatorFound = true;
-            continue;
         }
 
         else if (!operatorFound)
         {
-            number1 += c;
+            leftNumberString += currentCharacter;
         }
-        else 
+
+        else
         {
-            number2 += c;
+            rightNumberString += currentCharacter;
         }
     }
 
-    leftNumber = _ttoi(number1);
-    rightNumber = _ttoi(number2);
+    leftNumber = _ttoi(leftNumberString);
+    rightNumber = _ttoi(rightNumberString);
 
-    operation = leftNumber * rightNumber;
-    return operation;
-}
-
-int CMathOperationsFunctions::Division(CString currentStringValue)
-{
-    CString number1;
-    CString number2;
-    bool operatorFound = false;
-
-    for (int i = 0; i < currentStringValue.GetLength(); ++i) 
+    if (m_operator == _T('+'))
     {
-        TCHAR c = currentStringValue.GetAt(i);
-
-        if (c == '/')
-        {
-            operatorFound = true;
-            continue;
-        }
-
-        else if (!operatorFound) 
-        {
-            number1 += c;
-        }
-        else 
-        {
-            number2 += c;
-        }
-    }
-
-    leftNumber = _ttoi(number1);
-    rightNumber = _ttoi(number2);
-
-    if (rightNumber != 0)
-    {
-        operation = leftNumber / rightNumber;
+        operation = leftNumber + rightNumber;
         return operation;
-    } 
-
-    else 
-    {
-         AfxMessageBox(_T("Error: Division by zero is not allowed."));
-         return 0;    
     }
 
-    
+    else if (m_operator == _T('-'))
+    {
+        operation = leftNumber - rightNumber;
+        return operation;
+    }
+
+    else if (m_operator == _T('*'))
+    {
+        operation = leftNumber * rightNumber;
+        return operation;
+    }
+
+    else if (m_operator == _T('/'))
+    {
+        if (rightNumber != 0)
+        {
+            operation = leftNumber / rightNumber;
+            return operation;
+        }
+
+        else
+        {
+            AfxMessageBox(_T("Error: Division by zero is not allowed."));
+            return 0;
+        }
+    }
 }

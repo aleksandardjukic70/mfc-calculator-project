@@ -1,2 +1,3 @@
 ﻿  CMathOperationsFunctions.cpp
+C:\Users\Aleksandar\source\repos\mfc-calc\CMathOperations\CMathOperationsFunctions.cpp(67,1): warning C4715: 'CMathOperationsFunctions::MathOperation': not all control paths return a value
   CMathOperations.vcxproj -> C:\Users\Aleksandar\source\repos\mfc-calc\CalculatorProject\x64\Debug\CMathOperations.dll
