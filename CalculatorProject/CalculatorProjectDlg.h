@@ -86,7 +86,8 @@ public:
 	afx_msg void OnBnClickedButtonDivision();
 	afx_msg void OnBnClickedButtonEquals();
 	afx_msg void ButtonFunction(CString m_operator);
-	afx_msg void ResultFunction(CString m_currentStringValue, CString m_operator);
+	afx_msg void ArithmeticOperationPasser(CString m_currentStringValue, CString m_operator);
+	afx_msg void ResultFunction();
 
 	afx_msg void RegKeyBtnStyleSwitch(DWORD useCButton);
 	afx_msg void ApplyButtonStyleZero(CButton& button);

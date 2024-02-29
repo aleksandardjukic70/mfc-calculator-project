@@ -298,6 +298,8 @@ void CCalculatorProjectDlg::OnBnClickedButtonAddition()
 void CCalculatorProjectDlg::OnBnClickedButtonSubtraction()
 {
 	// napraviti logiku za operator '-' (for loop?)
+	// Ako je prvi char minus a sledeći nakon njega broj-> dodeli tu vrednost u posebnu cstring varijablu ->
+	// -> konvertuj je u int
 	m_operator = _T('-');
 	m_currentStringValue += _T('-');
 	m_editStringControl.SetWindowText(m_currentStringValue);
@@ -335,40 +337,44 @@ void CCalculatorProjectDlg::ButtonFunction(CString m_operator)
 	}
 }
 
-void CCalculatorProjectDlg::ResultFunction(CString m_currentStringValue, CString m_operator)
+void CCalculatorProjectDlg::ArithmeticOperationPasser(CString m_currentStringValue, CString m_operator)
 {
 	m_calculationValue = m_operation.MathOperation(m_currentStringValue, m_operator);
-	m_result.Format(_T("%d"), m_calculationValue);
 }
 
-void CCalculatorProjectDlg::OnBnClickedButtonEquals()
+void CCalculatorProjectDlg::ResultFunction()
 {
 	m_resultStringValue.Empty();
 
 	if (m_operator == _T('+'))
 	{
-		ResultFunction(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(m_currentStringValue, m_operator);
 	}
 
 	else if (m_operator == _T('-'))
 	{
-		ResultFunction(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(m_currentStringValue, m_operator);
 	}
 
 	else if (m_operator == _T('*'))
 	{
-		ResultFunction(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(m_currentStringValue, m_operator);
 	}
 
 	else if (m_operator == _T('/'))
 	{
-		ResultFunction(m_currentStringValue, m_operator);
+		ArithmeticOperationPasser(m_currentStringValue, m_operator);
 	}
 
+	m_result.Format(_T("%d"), m_calculationValue);
 	m_resultStringValue += _T(" = ") + m_result;
 	m_editStringControl.SetWindowText(m_resultStringValue);
 	m_currentStringValue.Empty();
+}
 
+void CCalculatorProjectDlg::OnBnClickedButtonEquals()
+{
+	ResultFunction();
 }
 
 
